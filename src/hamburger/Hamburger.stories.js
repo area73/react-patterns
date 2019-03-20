@@ -6,27 +6,9 @@ import styles from './Hamburger.module.scss';
 import notes from './Hamburger.md';
 import Hamburger from './Hamburger.js';
 
-const customStyles = `
-    .o-layout__item {
-      border: 8px solid white;
-      background-color:rgba(255,255,255,0.5);
-      text-align:center !important;
-    }
-    .o-layout__item span {
-      background-color: black;
-      color: white;
-      width: 100%;
-      display: inline-block;
-      padding: 5px;
-      margin-bottom: 10px;
-    }
-`;
 
-const stories = storiesOf('Hamburger', module).addDecorator(storyFn => (
-  <>
-    <style>{customStyles}</style>
-    {storyFn()}
-  </>));
+
+const stories = storiesOf('Hamburger', module);
 stories.add(
   'states',
   () => (

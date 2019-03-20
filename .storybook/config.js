@@ -4,6 +4,7 @@ import { addDecorator } from '@storybook/react';
 import { withKnobs } from '@storybook/addon-knobs';
 import {withInfo} from '@storybook/addon-info';
 import { themes } from '@storybook/theming';
+import React from 'react';
 // global decorators
 addDecorator(withKnobs);
 addDecorator(withInfo(
@@ -83,13 +84,35 @@ inline: true,
 }
 ));
 
+const customStyles = `
+    .o-layout__item {
+      border: 8px solid white;
+      background-color:rgba(255,255,255,0.5);
+      text-align:center !important;
+    }
+    .o-layout__item span {
+      background-color: black;
+      color: white;
+      width: 100%;
+      display: inline-block;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+`;
+
+addDecorator(storyFn => (
+  <>
+    <style>{customStyles}</style>
+    {storyFn()}
+  </>))
+
 // Option defaults:
 addParameters({
   backgrounds: [
-    { name: 'neutral', value: 'rgba(255,255,255,0.9)', default: true },
+    { name: 'neutral', value: 'rgba(255,255,255,0.9)'},
     { name: 'dark', value: '#000' },
     { name: 'light', value: '#fff' },
-    { name: 'twitter', value: '#00aced' },
+    { name: 'twitter', value: '#00aced' , default: true },
     { name: 'facebook', value: '#3b5998' },
   ],
   options: {

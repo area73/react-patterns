@@ -3,11 +3,16 @@ import PropTypes from 'prop-types';
 import styles from './Hamburger.module.scss';
 
 const Hamburger = props => {
+  const {state, onClick} = props;
+
   return (
     <button
-      className={` ${styles['menu-toggle']} ${styles.hamburger} ${props.state}`}
+      className={`  ${styles['menu-toggle']}
+                    ${styles.hamburger}
+                    ${state}`}
       id="menu-toggle"
       aria-expanded="false"
+      onClick={onClick}
     >
       <span className={styles['screen-reader-text']}>Menu</span>
       <svg
@@ -18,26 +23,30 @@ const Hamburger = props => {
         viewBox="0 0 100 100"
       >
         <g className={styles['svg-menu-toggle']}>
-          <path className={`${styles.line} ${styles['line-1']}`} d="M5 13h90v14H5z" />
-          <path className={`${styles.line} ${styles['line-2']}`}  d="M5 43h90v14H5z" />
-          <path className={`${styles.line} ${styles['line-3']}`}  d="M5 73h90v14H5z" />
+          <path className={`${styles.line} ${styles['line-1']}`} d="M5 13h90v14H5z"/>
+          <path className={`${styles.line} ${styles['line-2']}`} d="M5 43h90v14H5z"/>
+          <path className={`${styles.line} ${styles['line-3']}`} d="M5 73h90v14H5z"/>
         </g>
       </svg>
     </button>
   );
 };
 
+Hamburger.defaultProps = {
+  onClick: () => {},
+};
 
 Hamburger.propTypes = {
   /**
    View state of the component.
    each view state is related with a style.
    Available states:
-    opened
-    disabled
-    closed (default)
+   opened
+   disabled
+   closed (default)
    **/
   state: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 export default Hamburger;
