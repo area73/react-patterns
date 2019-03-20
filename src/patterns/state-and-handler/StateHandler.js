@@ -2,16 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Hamburger from '../../hamburger/Hamburger.js';
 
-import styles from '../../hamburger/Hamburger.module.scss';
-
 class StateHandler extends React.Component {
 
   state = {
-    view: 'opened',
+    view: 'open',
   };
 
   toggleState = () => {
-    this.setState(curr => ({view: curr.view ===  styles.opened ? '' : styles.opened}));
+    this.setState(curr => ({view: curr.view ===  'open' ? 'close' : 'open'}));
   };
 
   render() {

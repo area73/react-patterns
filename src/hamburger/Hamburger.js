@@ -2,6 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Hamburger.module.scss';
 
+// https://codeburst.io/alternative-to-javascripts-switch-statement-with-a-functional-twist-3f572787ba1c
+const matched = x => ({
+  on: () => matched(x),
+  otherwise: () => x,
+});
+const match = x => ({
+  on: (pred, fn) => (pred(x) ? matched(fn(x)) : match(x)),
+  otherwise: fn => fn(x),
+});
+
+const matchState = state => match(state).on(state => state === 'open', () => styles.opened).otherwise(() => null);
+
 const Hamburger = props => {
   const {state, onClick} = props;
 
@@ -9,7 +21,7 @@ const Hamburger = props => {
     <button
       className={`  ${styles['menu-toggle']}
                     ${styles.hamburger}
-                    ${state}`}
+                    ${matchState(state)}`}
       id="menu-toggle"
       aria-expanded="false"
       onClick={onClick}
