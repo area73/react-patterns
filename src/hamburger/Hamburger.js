@@ -12,16 +12,16 @@ const match = x => ({
   otherwise: fn => fn(x),
 });
 
-const matchState = state => match(state).on(state => state === 'open', () => styles.opened).otherwise(() => null);
+const matchState = view => match(view).on(state => state === 'open', () => styles.opened).otherwise(() => null);
 
 const Hamburger = props => {
-  const {state, onClick} = props;
+  const {view, onClick} = props;
 
   return (
     <button
       className={`  ${styles['menu-toggle']}
                     ${styles.hamburger}
-                    ${matchState(state)}`}
+                    ${matchState(view)}`}
       id="menu-toggle"
       aria-expanded="false"
       onClick={onClick}
@@ -46,6 +46,7 @@ const Hamburger = props => {
 
 Hamburger.defaultProps = {
   onClick: () => {},
+  view: 'close',
 };
 
 Hamburger.propTypes = {
@@ -53,11 +54,11 @@ Hamburger.propTypes = {
    View state of the component.
    each view state is related with a style.
    Available states:
-   opened
-   disabled
-   closed (default)
+   open
+   disable
+   close (default)
    **/
-  state: PropTypes.string,
+  view: PropTypes.string,
   onClick: PropTypes.func,
 };
 
