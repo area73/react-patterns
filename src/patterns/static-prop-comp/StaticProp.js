@@ -1,44 +1,40 @@
 import React from 'react';
-import Hamburger from '../state-and-handler/StateHandler.js';
+import Hamburger from '../../hamburger/Hamburger.js';
 import PropTypes from 'prop-types';
-import styles from '../../hamburger/Hamburger.module.scss';
 
 class StaticProp extends React.Component {
 
-  propTypes = {
+  static propTypes = {
     view: PropTypes.string,
     onClick: PropTypes.func,
   };
 
   state = {
-    view: 'open',
+    view: 'close',
   };
 
-  // static Open = ({view, children}) => (view === 'open' ? children : console.log('nuuul', view), null);
-  static Open = ({state, onClick, children}) => (`${state} / ${onClick} / ${children}`);
+  toggle = () => {
+    this.setState(({view}) => (
+      {view: (view === 'open') ? 'close' : 'open'}
+    ));
+  };
+
+  static Open = ({view, children}) => (view === 'open' ? children : null);
   static Close = ({view, children}) => (view === 'close' ? children : null);
-  static Burger = ({view, onClick, ...props}) => (<Hamburger state={view} onClick={onClick} {...props}/>);
-  // static disabled = ({state, children}) => (state === 'close' ? children : null);
+  static Burger = ({view, onClick, ...props}) => (<Hamburger view={view} onClick={onClick} {...props}/>);
 
-  toggleState = () => {
-    this.setState(curr => ({view: curr.view === styles.opened ? '' : styles.opened}));
-  };
-
-
-  toggle = () =>
-    this.setState(
-      ({on}) => ({on: !on}),
-      () => this.props.onToggle(this.state.on),
-    )
-
-
+  /**
+   * For each child compoent that this component has, it will try to render.
+   * Each of these sub element will recieve their own properties by cloning the element (React.cloneElement)
+   * @returns {(React.DetailedReactHTMLElement<{view: string, onClick: StaticProp.toggle}, HTMLElement> | React.ReactHTMLElement<HTMLElement> | React.ReactSVGElement | React.DOMElement<{view: string, onClick: StaticProp.toggle}, Element> | React.FunctionComponentElement<P> | React.ComponentElement<P, React.Component<P, React.ComponentState>> | React.ReactElement<P>)[]}
+   */
   render() {
     return React.Children.map(
       this.props.children,
       childElement => React.cloneElement(
         childElement, {
-          state: this.state.view,
-          onClick: this.onClick,
+          view: this.state.view,
+          onClick: this.toggle,
         }));
   }
 }

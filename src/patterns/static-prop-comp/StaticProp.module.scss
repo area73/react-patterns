@@ -1,0 +1,18 @@
+@import "~inuitcss/settings/settings.core";
+.StaticPropList {
+  padding: $inuit-global-spacing-unit-tiny;
+  background-color: rgba(0,0,0,0.5 );
+  width: fit-content;
+  margin: 0px auto;
+  li {
+    margin: 0 auto;
+    width: 200px;
+    &:hover{
+      background-color: black;
+    }
+  }
+  a {
+    color:white;
+    text-decoration: none;
+  }
+}

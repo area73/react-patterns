@@ -4,6 +4,7 @@ import {storiesOf} from '@storybook/react';
 import globalStyles from '../../styles/main.scss';
 import notes from './StaticProp.md';
 import StaticProp from './StaticProp.js';
+import styles from './StaticProp.module.scss';
 
 
 const stories = storiesOf('Patterns', module);
@@ -14,10 +15,17 @@ stories.add(
     <div className="o-layout o-layout--flush u-margin-vertical-large u-margin-horizontal">
       <div className="o-layout__item u-padding-bottom-small">
         <span>Static Prop Component</span>
-        <StaticProp view='open'>
+        <StaticProp>
           <StaticProp.Burger/>
-          <StaticProp.Open> OPEN </StaticProp.Open>
-          <StaticProp.Close> CLOSE </StaticProp.Close>
+          <StaticProp.Open>
+            <ul className={`${styles.StaticPropList} o-list-bare u-margin-top-tiny`} >
+              <li className="o-list-bare__item"><a href="#">Option one</a></li>
+              <li className="o-list-bare__item"><a href="#">Option two</a></li>
+              <li><a href="#">Option three</a></li>
+              <li><a href="#">Option four</a></li>
+            </ul>
+          </StaticProp.Open>
+          <StaticProp.Close> <div className="u-margin-top-tiny">Please click on the menu</div> </StaticProp.Close>
         </StaticProp>
       </div>
     </div>
