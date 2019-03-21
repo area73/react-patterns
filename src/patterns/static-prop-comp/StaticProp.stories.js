@@ -14,7 +14,11 @@ stories.add(
     <div className="o-layout o-layout--flush u-margin-vertical-large u-margin-horizontal">
       <div className="o-layout__item u-padding-bottom-small">
         <span>Static Prop Component</span>
-        <StaticProp/>
+        <StaticProp view='open'>
+          <StaticProp.Burger/>
+          <StaticProp.Open> OPEN </StaticProp.Open>
+          <StaticProp.Close> CLOSE </StaticProp.Close>
+        </StaticProp>
       </div>
     </div>
   ),
